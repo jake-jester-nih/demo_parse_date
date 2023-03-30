@@ -1,7 +1,7 @@
 # demo_parse_date
 
-Install:
+Install Dependencies:  
 yarn 
 
-Start
+Start Server:  
 yarn start
