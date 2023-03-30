@@ -4,20 +4,34 @@ html
     script(type='text/javascript')
   
   style( type="text/css").
-    input { padding: 5px; font-size: medium ;}
-    h2 { padding: 10px }
+    input { padding: 5px;; margin: 5px; font-size: medium ;}
+    h2 { padding: 10px}
 
   body 
     h1=greeting 
     h2 Parsed: #{parsed} Estimated: #{estimated}
-    
+
+    h3 Single date field with estimated    
     form(action="/" method='POST')
       label Date:
-        input(type='text' name='date_input' value="mar 10")
+        input(type='text' name='date_input' value=parsed)
       <br>
 
       label Estimated:
         input(type='checkbox' name='estimated' checked=estimated)
+      
+      <hr>
+      h3 3 date fields
+    
+      label Date: #{daymonthyear}
+      <br>
+
+      label day | month | year:
+        input( type='text' style="width: 50px" name='day' value=day)
+        input( type='text' style="width: 50px" name='month' value=month)
+        input( type='text' style="width: 50px" name='year' value=year)
+      <br>
+      <hr>
       input(type='submit' value="Submit" )
 
 

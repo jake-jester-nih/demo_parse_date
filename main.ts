@@ -1,5 +1,6 @@
 
 import {Express} from 'express'
+import { stringify } from 'querystring';
 var express = require('express')
 
 const app:Express = express();
@@ -17,12 +18,32 @@ app.get('/', (req, res) => {
 app.post( '/', (req, res) => {
   
   let date_input = req.body.date_input
-  let estimated = req.body.estimated ? true : false
-  
   let raw = Date.parse( date_input )
-  let parsed = new Date( raw ).toISOString()
-          
-  res.render ( 'main', {greeting: "Response", parsed, estimated })
+  let parsed
+  try {  parsed = new Date( raw ).toISOString() } catch( err ) { parsed = ''}
+    
+  let estimated = req.body.estimated ? true : false
+  let day = req.body.day
+  let month = req.body.month
+  let year = req.body.year
+  
+  let daymonthyear
+
+  let clearsplitdates = () => {
+    daymonthyear = ''
+    day=''
+    month=''
+    year='' 
+  }
+
+  if ( isNaN(year) ||  isNaN(day)) {
+    clearsplitdates()  
+  } else {
+    try { daymonthyear = new Date(Date.parse( `${year} ${month} ${day}` )).toISOString() }
+    catch( e ) { clearsplitdates()}
+  }
+  
+  res.render ( 'main', {greeting: "Response", parsed, estimated, daymonthyear,day, month, year })
 })
 
 app.listen(port, () => {
