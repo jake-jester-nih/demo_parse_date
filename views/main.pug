@@ -1,0 +1,24 @@
+html 
+  head 
+    title Date parsing demo 
+    script(type='text/javascript')
+  
+  style( type="text/css").
+    input { padding: 5px; font-size: medium ;}
+    h2 { padding: 10px }
+
+  body 
+    h1=greeting 
+    h2 Parsed: #{parsed} Estimated: #{estimated}
+    
+    form(action="/" method='POST')
+      label Date:
+        input(type='text' name='date_input' value="mar 10")
+      <br>
+
+      label Estimated:
+        input(type='checkbox' name='estimated' checked=estimated)
+      input(type='submit' value="Submit" )
+
+
+    
