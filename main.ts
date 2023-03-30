@@ -17,18 +17,22 @@ app.get('/', (req, res) => {
 
 app.post( '/', (req, res) => {
   
+  // Process the first example
   let date_input = req.body.date_input
   let raw = Date.parse( date_input )
   let parsed
   try {  parsed = new Date( raw ).toISOString() } catch( err ) { parsed = ''}
     
   let estimated = req.body.estimated ? true : false
+
+  //process the second example
   let day = req.body.day
   let month = req.body.month
   let year = req.body.year
   
   let daymonthyear
 
+  // utilty to clear split date fields
   let clearsplitdates = () => {
     daymonthyear = ''
     day=''
@@ -36,12 +40,14 @@ app.post( '/', (req, res) => {
     year='' 
   }
 
+  // error handling for split date example
   if ( isNaN(year) ||  isNaN(day)) {
     clearsplitdates()  
   } else {
     try { daymonthyear = new Date(Date.parse( `${year} ${month} ${day}` )).toISOString() }
     catch( e ) { clearsplitdates()}
   }
+  
   
   res.render ( 'main', {greeting: "Response", parsed, estimated, daymonthyear,day, month, year })
 })
