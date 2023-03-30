@@ -5,3 +5,5 @@ yarn
 
 Start Server:  
 yarn start
+
+ALL CODE CONTAINED IN: main.ts
